@@ -1,3 +1,4 @@
+---
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -15,7 +16,7 @@ spec:
     - ReadWriteMany
   nfs:
     path: $path
-    server: 10.112.122.9  #change to your nfs server ip here
+    server: 192.168.1.206
 
 ---
 apiVersion: v1
@@ -31,3 +32,28 @@ spec:
      storage: 10Mi
 
 ---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: $pvDataName
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    path: $datapath
+    server: 192.168.1.206
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+ namespace: $org
+ name: $pvDataName
+spec:
+ accessModes:
+   - ReadWriteMany
+ resources:
+   requests:
+     storage: 10Gi

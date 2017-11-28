@@ -26,9 +26,18 @@ def getTemplate(templateName):
 # create org/namespace 
 def configORGS(name, path): # name means if of org, path describe where is the namespace yaml to be created. 	
 	namespaceTemplate = getTemplate("fabric_1_0_template_pod_namespace.yaml")
+	#print(path)
+	dataPath = ""
+	if path.find("peerOrganizations") != -1:
+		dataPath = path.replace("transform/../crypto-config/peerOrganizations/", "/opt/share/data/peer/")
+	elif path.find("ordererOrganizations") != -1:
+		dataPath = path.replace("transform/../crypto-config/ordererOrganizations/", "/opt/share/data/orderer/")
+		
 	render(namespaceTemplate, path + "/" + name + "-namespace.yaml", org = name,
 	pvName = name + "-pv",
-	path = path.replace("transform/../", "/opt/share/")
+	pvDataName = name + "-pvdata",
+	path = path.replace("transform/../", "/opt/share/fabric/"),
+	datapath = dataPath
 	)
 
 	
@@ -60,6 +69,7 @@ def configORGS(name, path): # name means if of org, path describe where is the n
 		tlsCertTemplate = '/etc/hyperledger/fabric-ca-server-config/{}-cert.pem'
 		tlsKeyTemplate = '/etc/hyperledger/fabric-ca-server-config/{}'
 		caPathTemplate = 'ca/'
+		caDataTemplate = 'ca/'
 		cmdTemplate =  ' fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/{}-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/{} -b admin:adminpw -d '
 
 		skFile = ""
@@ -70,10 +80,12 @@ def configORGS(name, path): # name means if of org, path describe where is the n
 		render(caTemplate, path + "/" + name + "-ca.yaml", namespace = name,
 		command = '"' + cmdTemplate.format("ca."+name, skFile) + '"',
 		caPath = caPathTemplate,
+		caDataPath = caDataTemplate,
 		tlsKey = tlsKeyTemplate.format(skFile),	
 		tlsCert = tlsCertTemplate.format("ca."+name),
 		nodePort = exposedPort,
-		pvName = name + "-pv" 
+		pvName = name + "-pv",
+		pvDataName = name + "-pvdata"
 		)
 		#######
 
@@ -115,7 +127,10 @@ def configPEERS(name, path): # name means peerid.
 	tlsPath = tlsPathTemplate.format(name),
 	nodePort1 = exposedPort1,
 	nodePort2 = exposedPort2,
-        pvName = orgName + "-pv"
+  pvName = orgName + "-pv",
+	pvDataName = orgName + "-pvdata",
+	peerDataPath = peerName + "/peerdata",
+	couchdbDataPath = peerName + "/couchdb"
 	)
 
 
@@ -141,7 +156,9 @@ def configORDERERS(name, path): # name means ordererid
 	mspPath= mspPathTemplate.format(name),
 	tlsPath= tlsPathTemplate.format(name),
 	nodePort = exposedPort,
-	pvName = orgName + "-pv"
+	pvName = orgName + "-pv",
+	pvDataName = orgName + "-pvdata",
+	ordererDataPath = ordererName
 	)
 
 
