@@ -8,6 +8,7 @@ spec:
        storage: 500Mi
     accessModes:
        - ReadWriteMany
+    storageClassName: $artifactsName  
     nfs:
       path: /opt/share/fabric/channel-artifacts
       server: 192.168.1.206
@@ -21,6 +22,7 @@ metadata:
 spec:
    accessModes:
      - ReadWriteMany
+   storageClassName: $artifactsName  
    resources:
       requests:
         storage: 10Mi

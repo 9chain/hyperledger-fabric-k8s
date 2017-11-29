@@ -28,7 +28,7 @@ def runOrderers(path):
 
 def runPeers(path):
 	orgs = os.listdir(path)
-	for org in reversed(orgs):
+	for org in orgs:
 		orgPath = os.path.join(path, org)
 
 		namespaceYaml = os.path.join(orgPath, org + "-namespace.yaml" ) # namespace.yaml

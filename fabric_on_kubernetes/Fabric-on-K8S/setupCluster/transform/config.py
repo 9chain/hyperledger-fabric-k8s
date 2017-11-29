@@ -29,9 +29,9 @@ def configORGS(name, path): # name means if of org, path describe where is the n
 	#print(path)
 	dataPath = ""
 	if path.find("peerOrganizations") != -1:
-		dataPath = path.replace("transform/../crypto-config/peerOrganizations/", "/opt/share/data/peer/")
+		dataPath = path.replace("transform/../crypto-config/peerOrganizations/", "/data/peer/")
 	elif path.find("ordererOrganizations") != -1:
-		dataPath = path.replace("transform/../crypto-config/ordererOrganizations/", "/opt/share/data/orderer/")
+		dataPath = path.replace("transform/../crypto-config/ordererOrganizations/", "/data/orderer/")
 		
 	render(namespaceTemplate, path + "/" + name + "-namespace.yaml", org = name,
 	pvName = name + "-pv",

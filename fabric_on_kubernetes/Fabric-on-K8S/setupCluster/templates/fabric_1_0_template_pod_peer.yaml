@@ -18,10 +18,13 @@ spec:
     spec:
       containers:
       - name: couchdb
-        image: hyperledger/fabric-couchdb:x86_64-1.0.0
+        image: klaemo/couchdb
         ports:
          - containerPort: 5984
-
+        volumeMounts:
+         - mountPath: /opt/couchdb/data
+           name: peerdata
+           subPath: $couchdbDataPath         
       - name: $podName
         image: hyperledger/fabric-peer:x86_64-1.0.0
         env:
