@@ -1,0 +1,39 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: topic-create
+  namespace: kafka
+spec:
+  template:
+    metadata:
+      name: topic-create
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: kafka-vul
+        image: solsson/kafka-persistent:0.10.1
+        command:
+        - ./bin/kafka-topics.sh
+        - --zookeeper
+        - zookeeper:2181
+        - --create
+        - --topic
+        - vul_test
+        - --partitions
+        - "6"
+        - --replication-factor
+        - "1"
+      - name: kafka-us
+        image: solsson/kafka-persistent:0.10.1
+        command:
+        - ./bin/kafka-topics.sh
+        - --zookeeper
+        - zookeeper:2181
+        - --create
+        - --topic
+        - us_test
+        - --partitions
+        - "6"
+        - --replication-factor
+        - "1"
+
