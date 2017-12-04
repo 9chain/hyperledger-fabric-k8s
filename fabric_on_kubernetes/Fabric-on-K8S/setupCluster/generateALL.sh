@@ -34,6 +34,7 @@ function generateChannelArtifacts() {
 	
 	chmod -R 777 ./channel-artifacts && chmod -R 777 ./crypto-config
 
+  cp -r ./chaincode_example02 ./channel-artifacts
 	cp ./channel-artifacts/genesis.block ./crypto-config/ordererOrganizations/*
 	mkdir -p $SHARE_PATH
 	cp -r ./crypto-config $SHARE_PATH && cp -r ./channel-artifacts $SHARE_PATH
