@@ -58,6 +58,8 @@ spec:
           value: $peerGossip
         - name: CORE_PEER_LOCALMSPID
           value: $localMSPID
+        - name: GODEBUG
+          value: netdns=go           
         workingDir: /opt/gopath/src/github.com/hyperledger/fabric/peer
         ports:
          - containerPort: 7051

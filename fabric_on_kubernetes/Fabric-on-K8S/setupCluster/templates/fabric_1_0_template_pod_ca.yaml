@@ -29,6 +29,8 @@ spec:
            value: $tlsCert
          - name: FABRIC_CA_SERVER_TLS_KEYFILE
            value: $tlsKey
+         - name: GODEBUG
+           value: netdns=go
          ports:
           - containerPort: 7054
          command: ["sh"]

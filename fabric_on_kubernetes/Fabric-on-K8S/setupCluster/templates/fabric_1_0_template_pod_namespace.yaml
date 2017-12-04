@@ -9,12 +9,13 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: $pvName
+  labels:
+    app: $pvName
 spec:
   capacity:
     storage: 500Mi
   accessModes:
     - ReadWriteMany
-  storageClassName: $pvName
   nfs:
     path: $path
     server: 192.168.1.206
@@ -28,22 +29,25 @@ metadata:
 spec:
  accessModes:
    - ReadWriteMany
- storageClassName: $pvName
  resources:
    requests:
      storage: 10Mi
+ selector:
+   matchLabels:
+     app: $pvName    
 
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: $pvDataName
+  labels:
+    app: $pvDataName
 spec:
   capacity:
     storage: 10Gi
   accessModes:
     - ReadWriteMany
-  storageClassName: $pvDataName
   nfs:
     path: $datapath
     server: 192.168.1.206
@@ -57,7 +61,9 @@ metadata:
 spec:
  accessModes:
    - ReadWriteMany
- storageClassName: $pvDataName
  resources:
    requests:
      storage: 10Gi
+ selector:
+   matchLabels:
+     app: $pvDataName     
