@@ -34,6 +34,8 @@ spec:
             value: "9092"
           - name: GODEBUG
             value: netdns=go   
+          - name: KAFKA_ZOOKEEPER_CONNECTION_TIMEOUT_MS
+            value: "30000"
         # command: ["/docker-entrypoint.sh"]
         # args: ["/opt/kafka/bin/kafka-server-start.sh", "--override", "broker.id=$(hostname | awk -F'-' '{print $2}')"]
         # - sh
