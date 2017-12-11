@@ -47,7 +47,9 @@ function generateK8sYaml (){
 
 function clean () {
 	rm -rf /opt/share/fabric/crypto-config/*
+	rm -rf /opt/share/fabric/channel-artifacts/*
 	rm -rf crypto-config
+  rm -rf channel-artifacts
 }
 
 

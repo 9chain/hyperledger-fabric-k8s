@@ -46,3 +46,19 @@ spec:
     matchLabels:
       app: kafka
       podindex: "2"
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: datadir-kafka-3
+  namespace: kafka
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 19Gi
+  selector:
+    matchLabels:
+      app: kafka
+      podindex: "3"
