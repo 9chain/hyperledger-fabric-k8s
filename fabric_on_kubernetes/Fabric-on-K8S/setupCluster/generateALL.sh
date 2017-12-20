@@ -4,7 +4,7 @@ CHANNEL_NAME=$1
 : ${CHANNEL_NAME:="mychannel"}
 
 #export TOOLS=$PWD/../bin
-export TOOLS=/Users/jiaxi/work/bin
+export TOOLS=~/work/bin
 export CONFIG_PATH=$PWD
 export FABRIC_CFG_PATH=$PWD
 export SHARE_PATH=/opt/share/fabric/
