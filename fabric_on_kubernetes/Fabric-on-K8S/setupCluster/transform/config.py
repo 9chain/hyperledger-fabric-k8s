@@ -110,9 +110,10 @@ def configPEERS(name, path): # name means peerid.
 
 	addressSegment = (int(orgName.split("-")[0].split("org")[-1]) - 1) * GAP
 	##peer from like this peer 0##
-	peerOffset = int((peerName.split("peer")[-1])) * 2
+	peerOffset = int((peerName.split("peer")[-1])) * 3
 	exposedPort1 = PORTSTARTFROM + addressSegment + peerOffset + 1
 	exposedPort2 = PORTSTARTFROM + addressSegment + peerOffset + 2
+	exposedPort3 = PORTSTARTFROM + addressSegment + peerOffset + 3
 	
 	render(configTemplate, path + "/" + name + ".yaml", 
 	namespace = orgName,
@@ -127,6 +128,7 @@ def configPEERS(name, path): # name means peerid.
 	tlsPath = tlsPathTemplate.format(name),
 	nodePort1 = exposedPort1,
 	nodePort2 = exposedPort2,
+	nodePort3 = exposedPort3,
   pvName = orgName + "-pv",
 	pvDataName = orgName + "-pvdata",
 	peerDataPath = peerName + "/peerdata",

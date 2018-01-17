@@ -115,3 +115,9 @@ spec:
      port: 7052
      targetPort: 7052
      nodePort: $nodePort2
+
+   - name: event-listen
+     protocol: TCP
+     port: 7053
+     targetPort: 7053
+     nodePort: $nodePort3
