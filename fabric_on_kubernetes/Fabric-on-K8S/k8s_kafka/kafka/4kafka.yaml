@@ -14,7 +14,7 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
       - name: broker
-        image: hyperledger/fabric-kafka:x86_64-1.0.0
+        image: hyperledger/fabric-kafka:x86_64-1.0.4
         ports:
           - containerPort: 9092
         env:

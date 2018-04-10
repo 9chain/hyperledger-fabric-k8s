@@ -26,7 +26,7 @@ spec:
            name: peerdata
            subPath: $couchdbDataPath         
       - name: $podName
-        image: hyperledger/fabric-peer:x86_64-1.0.0
+        image: hyperledger/fabric-peer:x86_64-1.0.4
         env:
         - name: CORE_LEDGER_STATE_STATEDATABASE
           value: "CouchDB"
