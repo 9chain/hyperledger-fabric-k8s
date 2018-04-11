@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: couchdb
-        image: klaemo/couchdb
+        image: hyperledger/fabric-couchdb:x86_64-0.4.6
         ports:
          - containerPort: 5984
         volumeMounts:
@@ -26,7 +26,7 @@ spec:
            name: peerdata
            subPath: $couchdbDataPath         
       - name: $podName
-        image: hyperledger/fabric-peer:x86_64-1.0.4
+        image: hyperledger/fabric-peer:x86_64-1.1.0
         env:
         - name: CORE_LEDGER_STATE_STATEDATABASE
           value: "CouchDB"
@@ -52,10 +52,10 @@ spec:
           value: "/etc/hyperledger/fabric/tls/ca.crt"
         - name: CORE_PEER_ID
           value: $corePeerID
-        - name: CORE_PEER_ADDRESS
-          value: $peerAddress
         - name: CORE_PEER_GOSSIP_EXTERNALENDPOINT
           value: $peerGossip
+        - name: CORE_PEER_GOSSIP_BOOTSTRAP
+          value: $peerGossip          
         - name: CORE_PEER_LOCALMSPID
           value: $localMSPID
         - name: GODEBUG
